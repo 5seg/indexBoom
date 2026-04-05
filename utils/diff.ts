@@ -90,14 +90,14 @@ export const handleDiff = async (diff: DiffResult) => {
       //* Noting to do
     }
   }
+  const hosturl = new URL(process.env.SITEMAP_URL!);
   const result = await indexNow({
-    host: new URL(process.env.SITEMAP_URL!).hostname!,
+    host: hosturl.hostname,
     key: process.env.INDEXNOW_KEY!,
-    keyLocation: process.env.SITEMAP_URL!,
     urlList: urls,
   });
   if (result.ok) {
-    console.log("✅ Submitted");
+    console.log(`✅ Submitted ${result.status}`);
   } else {
     console.log(`❌ Result was failed with ${result.status}`);
   }

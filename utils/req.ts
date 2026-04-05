@@ -1,7 +1,7 @@
 interface indexNowReqBody {
   host: string;
   key: string;
-  keyLocation: string;
+  keyLocation?: string;
   urlList: string[];
 }
 

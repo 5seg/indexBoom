@@ -66,7 +66,7 @@ export const handleDiff = async (diff: DiffResult) => {
 
   const urls: string[] = [];
   if (diff.added.length > 0) {
-    console.log(`\n🆕 New Pages Found (${diff.added.length} Pages)`);
+    console.log(`🆕 New Pages Found (${diff.added.length} Pages)`);
     for (const entry of diff.added) {
       console.log(`  + ${entry.url}`);
       console.log(`    lastmod: ${entry.lastmod}`);
@@ -75,7 +75,7 @@ export const handleDiff = async (diff: DiffResult) => {
   }
 
   if (diff.modified.length > 0) {
-    console.log(`\n✏️  Modified Pages Found (${diff.modified.length} Pages)`);
+    console.log(`✏️  Modified Pages Found (${diff.modified.length} Pages)`);
     for (const entry of diff.modified) {
       console.log(`  ~ ${entry.url}`);
       console.log(`    lastmod: ${entry.lastmod}`);
@@ -84,7 +84,7 @@ export const handleDiff = async (diff: DiffResult) => {
   }
 
   if (diff.removed.length > 0) {
-    console.log(`\n🗑️  Deleted Pages Found (${diff.removed.length} Pages)`);
+    console.log(`🗑️  Deleted Pages Found (${diff.removed.length} Pages)`);
     for (const entry of diff.removed) {
       console.log(`  - ${entry.url}`);
       //* Noting to do

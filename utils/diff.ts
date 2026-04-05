@@ -12,16 +12,16 @@ type DiffResult = {
   removed: SitemapEntry[];
 };
 
-const CACHE_FILE = process.env.CACHE_FILE_PATH!;
+const DATA_FILE = process.env.DATA_FILE_PATH!;
 
-export const loadCache = async (): Promise<SitemapEntry[]> => {
-  if (!existsSync(CACHE_FILE)) return [];
-  const text = await Bun.file(CACHE_FILE).text();
+export const loadData = async (): Promise<SitemapEntry[]> => {
+  if (!existsSync(DATA_FILE)) return [];
+  const text = await Bun.file(DATA_FILE).text();
   return JSON.parse(text) as SitemapEntry[];
 };
 
-export const saveCache = async (entries: SitemapEntry[]) => {
-  await Bun.write(CACHE_FILE, JSON.stringify(entries, null, 2));
+export const saveData = async (entries: SitemapEntry[]) => {
+  await Bun.write(DATA_FILE, JSON.stringify(entries, null, 2));
 };
 
 export function detectDiff(
@@ -61,7 +61,7 @@ export const handleDiff = async (diff: DiffResult) => {
     diff.removed.length === 0
   ) {
     console.log("✅ No Changes");
-    return;
+    return false;
   }
 
   const urls: string[] = [];
@@ -98,7 +98,9 @@ export const handleDiff = async (diff: DiffResult) => {
   });
   if (result.ok) {
     console.log(`✅ Submitted ${result.status}`);
+    return true;
   } else {
     console.log(`❌ Result was failed with ${result.status}`);
+    return false;
   }
 };

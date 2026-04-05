@@ -3,7 +3,7 @@ export const extractor = async (sitemap: string) => {
     .replaceAll("\n", "")
     .split("<sitemap>")
     .map((line) => {
-      if (line.trimStart().startsWith("<loc>") && line.includes("<lastmod>")) {
+      if (line.trimStart().startsWith("<loc>")) {
         return line
           .replaceAll(" ", "")
           .replace("</sitemap>", "")
@@ -15,7 +15,7 @@ export const extractor = async (sitemap: string) => {
     const urlRegex = line!.match(/<loc>(.*?)<\/loc>/);
     const dateRegex = line!.match(/<lastmod>(.*?)<\/lastmod>/);
     const url = urlRegex![1]!;
-    const lastmod = dateRegex![1]!;
+    const lastmod = dateRegex ? dateRegex[1]! : null;
     return { url, lastmod };
   });
   return parsed;

@@ -97,10 +97,10 @@ export const handleDiff = async (diff: DiffResult) => {
     urlList: urls,
   });
   if (result.ok) {
-    console.log(`✅ Submitted ${result.status}`);
+    console.log(`✅ Submitted ${urls.length} pages (${result.status})`);
     return true;
   } else {
-    console.log(`❌ Result was failed with ${result.status}`);
+    console.log(`❌ Failed with ${result.status}`);
     return false;
   }
 };

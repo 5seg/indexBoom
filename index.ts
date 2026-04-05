@@ -10,6 +10,10 @@ if (!process.env.CACHE_FILE_PATH) {
   console.error(new Error("CACHE_FILE_PATH is not defined in .env"));
   process.exit(1);
 }
+if (!process.env.INDEXNOW_KEY) {
+  console.error(new Error("INDEXNOW_KEY is not defined in .env"));
+  process.exit(1);
+}
 
 const sitemap = await (await fetch(url)).text();
 const newMap = await extractor(sitemap);
